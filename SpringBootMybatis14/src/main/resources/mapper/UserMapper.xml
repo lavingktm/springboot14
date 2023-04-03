@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+
+    <insert id="add">
+        insert into `user` (user_name,user_password)
+        values (#{user1.userName},#{user1.userPassword})
+    </insert>
+    <update id="update">
+        update `user`
+        set user_name=#{user2.userName}
+        where user_id=#{user2.userId}
+    </update>
+    <delete id="del">
+        delete  from `user`
+        where user_id=#{uid}
+    </delete>
+    <resultMap id="f" type="com.example.pojo.User">
+        <id property="userId" column="user_id"></id>
+        <result property="userName" column="user_name"></result>
+    </resultMap>
+    <select id="findById" resultMap="f">
+        select user_id,user_name
+        from `user`
+        where user_id=#{uid}
+    </select>
+    <resultMap id="d" type="com.example.pojo.User">
+        <id property="userId" column="user_id"></id>
+        <result property="userName" column="user_name"></result>
+        <result property="userPassword" column="user_password"></result>
+    </resultMap>
+    <select id="findAll" resultMap="d">
+        select user_id,user_name,user_password
+        from `user`
+    </select>
+</mapper>
